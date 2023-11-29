@@ -28,124 +28,110 @@ class BloombergMarketWatcher:
     def url(self):
         return self.__url
 
-  @url.setter
-  def url(self, url):
-    try:
-      url_functionality = urllib.parse.urlparse(url)
-      if url_functionality.scheme not in self.schemes:
-        raise ValueError("Invalid Scheme.")
-      elif url_functionality.netloc == "":
-        raise ValueError("Invalid Netloc or web page name.")
-      elif not (url_functionality.port and url_functionality.port.isdigit()
-                and 0 <= int(url_functionality.port) <= 65535):
-        raise ValueError("Invalid port in the URL")
-    except ValueError as error_message:
-      """
-      The except block for ValueError
-      catches these errors that may occur
-      1. if an invalid port is specified in the URL
-      2. Unmatched square brackets in the netloc attribute are found
-      3. Characters in the netloc attribute that decompose under NFKC normalization
-         (as used by the IDNA encoding) into any of /, ?, #, @, or :
-      4. Invalid Scheme.
-      5. Invalid Netloc or web page name.
-      """
-      print(f"{error_message}")
-      time.sleep(10)
-      os.system("clear")
-    else:
-      self.__url = url
-      print(f"URL successfully set to {url}")
-      time.sleep(10)
-      os.system("clear")
-
-  @property
-  def header(self):
-    return self.__headers
-
-  @header.setter
-  def add_header(self, key=None, value=None):
-    try:
-      if key is None or value is None:
-        raise ValueError(
-            f"Key and Value should be of type string but Key is of type \
-  {type(key)} and Value is of type {type(value)}")
-      elif not isinstance(key, str) or not isinstance(value, str):
-        raise TypeError(
-            f"Key and Value should be of type string but Key is of type \
-  {type(key)} and Value is of type {type(value)}")
-    except ValueError as error_message:
-      print(f"{error_message}")
-      time.sleep(10)
-      os.system("clear")
-    except TypeError as error_message:
-      print(f"{error_message}")
-      time.sleep(10)
-      os.system("clear")
-    else:
-      self.__headers[key] = value
-
-  @property
-  def region(self):
-    return self.__region
-
-  @region.setter
-  def region(self, region):
-    try:
-      if not isinstance(region, str):
-        raise TypeError(
-            f"Region should be of type string but Region is of type {type(region)}"
-        )
-    except TypeError as error_message:
-      print(f"{error_message}")
-      time.sleep(10)
-      os.system("clear")
-    else:
-      self.__region = region
-      while True:
-        if self.__region == "americas" or self.__region == "emea" or \
-  self.__region == "apac":
-          break
+    @url.setter
+    def url(self, url):
+        try:
+            url_functionality = urllib.parse.urlparse(url)
+            if url_functionality.scheme not in self.schemes:
+                raise ValueError("Invalid Scheme.")
+            elif url_functionality.netloc == "":
+                raise ValueError("Invalid Netloc or web page name.")
+            elif not (url_functionality.port and url_functionality.port.isdigit() and 0 <= int(url_functionality.port) <= 65535):
+                raise ValueError("Invalid port in the URL")
+        except ValueError as error_message:
+            """
+            The except block for ValueError
+            catches these errors that may occur
+            1. if an invalid port is specified in the URL
+            2. Unmatched square brackets in the netloc attribute are found
+            3. Characters in the netloc attribute that decompose under NFKC normalization
+                (as used by the IDNA encoding) into any of /, ?, #, @, or :
+            4. Invalid Scheme.
+            5. Invalid Netloc or web page name.
+            """
+            print(f"{error_message}")
+            time.sleep(10)
+            os.system("clear")
         else:
-          print("Here is the list of regions:\n",
-                "Americas\n",
-                "EMEA\n",
-                "APAC",
-                sep="")
-          self.__region = input("Enter a region: ").lower()
-      time.sleep(10)
-      os.system("clear")
+            self.__url = url
+            print(f"URL successfully set to {url}")
+            time.sleep(10)
+            os.system("clear")
 
-  def __regionalLocation(self):
-    print("Here is the list of regions:\n",
-          "Americas\n",
-          "EMEA\n",
-          "APAC",
-          sep="")
-    self.__region = input("Enter a region: ").lower()
-    while True:
-      if self.__region == "americas" or self.__region == "emea" or self.__region == "apac":
-        break
-      else:
+    @property
+    def header(self):
+        return self.__headers
+
+    @header.setter
+    def add_header(self, key=None, value=None):
+        try:
+            if key is None or value is None:
+                raise ValueError(f"Key and Value should be of type string but Key is of type \
+                        {type(key)} and Value is of type {type(value)}")
+            elif not isinstance(key, str) or not isinstance(value, str):
+                raise TypeError(f"Key and Value should be of type string but Key is of type \
+                        {type(key)} and Value is of type {type(value)}")
+        except ValueError as error_message:
+            print(f"{error_message}")
+            time.sleep(10)
+            os.system("clear")
+        except TypeError as error_message:
+            print(f"{error_message}")
+            time.sleep(10)
+            os.system("clear")
+        else:
+            self.__headers[key] = value
+
+    @property
+    def region(self):
+        return self.__region
+
+    @region.setter
+    def region(self, region):
+        try:
+            if not isinstance(region, str):
+                raise TypeError(f"Region should be of type string but Region is of type {type(region)}")
+        except TypeError as error_message:
+            print(f"{error_message}")
+            time.sleep(10)
+            os.system("clear")
+        else:
+            self.__region = region
+            while True:
+                if self.__region == "americas" or self.__region == "emea" or self.__region == "apac":
+                    break
+                else:
+                    print("Here is the list of regions:\n", "Americas\n", "EMEA\n", "APAC", sep="")
+                    self.__region = input("Enter a region: ").lower()
+            time.sleep(10)
+            os.system("clear")
+
+    def __regionalLocation(self):
+        print("Here is the list of regions:\n", "Americas\n", "EMEA\n", "APAC", sep="")
         self.__region = input("Enter a region: ").lower()
-    os.system("clear")
+        while True:
+            if self.__region == "americas" or self.__region == "emea" or self.__region == "apac":
+                break
+            else:
+                self.__region = input("Enter a region: ").lower()
+        os.system("clear")
 
-  def __indexNumber(self):
-    if self.__region == "americas":
-      print("Here is a list of the index_name\n",
-            "Enter 1 for DOW JONES INDUS. AVG\n",
-            "Enter 2 for S&P 500 INDEX\n", "Enter 3 for NASDAQ COMPOSITE\n",
-            "Enter 4 for NYSE COMPOSITE INDEX\n",
-            "Enter 5 for S&P/TSX COMPOSITE INDEX")
-      self.__index_name = input("Enter a index_number: ")
-      while True:
-        if self.__index_name == "1" or self.__index_name == "2" or self.__index_name == "3"\
-          or self.__index_name == "4" or self.__index_name == "5":
-          break
-        else:
-          self.__index_name = input("Enter a index_number: ")
-    elif self.__region == "emea":
-      print("Here is a list of the index_name\n",
+    def __indexNumber(self):
+        if self.__region == "americas":
+            print("Here is a list of the index_name\n",
+                "Enter 1 for DOW JONES INDUS. AVG\n",
+                "Enter 2 for S&P 500 INDEX\n", "Enter 3 for NASDAQ COMPOSITE\n",
+                "Enter 4 for NYSE COMPOSITE INDEX\n",
+                "Enter 5 for S&P/TSX COMPOSITE INDEX")
+            self.__index_name = input("Enter a index_number: ")
+        while True:
+            if self.__index_name == "1" or self.__index_name == "2" or self.__index_name == "3"\
+                    or self.__index_name == "4" or self.__index_name == "5":
+                break
+            else:
+                self.__index_name = input("Enter a index_number: ")
+        elif self.__region == "emea":
+            print("Here is a list of the index_name\n",
             "Enter 1 for Euro Stoxx 50 Pr\n", "Enter 2 for FTSE 100 INDEX\n",
             "Enter 3 for DAX INDEX\n", "Enter 4 for CAC 40 INDEX\n",
             "Enter 5 for IBEX 35 INDEX")
@@ -278,4 +264,173 @@ class BloombergMarketWatcher:
         ])
       print(f"file successfully saved as {file_name}")
       time.sleep(3)
-      os.system("clear")      
+      os.system("clear")
+
+  def getMovers2(self):
+    """A list of assets that made the most gains in the market.
+      and this function only works if the user as set their region
+      name 
+    """
+    # url for get movers api
+    if self.__region is None:
+      self.getMovers1()
+      return 1
+    self.__indexNumber()
+    self.__indexRegionMapping()
+
+    # query parameters for the get movers api
+    self.__querystring = {"id": self.__id, "template": "INDEX"}
+    try:
+      response = requests.get(self.__url,
+                              headers=self.__headers,
+                              params=self.__querystring)
+    except requests.exceptions.RequestException as req_error:
+      print(req_error)
+      return 0
+    # convert response to json format
+    resp_json = response.json()
+    # store the data in good format
+    # first open the csv file for writing to add column headers to it.
+    # ask  the user categories
+    print("These are the list of categories:\n", "Active\n", "Laggards\n",
+          "Leaders\n")
+    category = input("Enter a category: ").lower()
+    while True:
+      if category == "active" or category == "laggards" or category == "leaders":
+        break
+      else:
+        category = input("Enter a category: ").lower()
+    file_name = f"{self.__region}_{self.__id}_market_watch_{category}.csv"
+    with open(file_name, 'w', newline='') as csvfile:
+      column_writer = csv.writer(csvfile, delimiter=' ')
+      # get column keys first in a list
+      try:
+        column_keys = list(resp_json[category][0].keys())
+      except KeyError:
+        print(f"Server was unable to process the request with status code \
+  {resp_json['status']} and message {resp_json['message']}!!!")
+        time.sleep(7)
+        os.system("clear")
+        return 0
+      # write the column headers to the csv file
+      public_columns = [
+          "securitytype", "symbol", "exchange", "currency", "resourcetype",
+          "name", "last", "yearhigh", "dayhigh", "volume", "yearlow", "daylow",
+          "pctchangeytd"
+      ]
+      private_columns = []
+      for column in column_keys:
+        if column.lower() not in public_columns:
+          continue
+        private_columns.append(column)
+
+      column_writer.writerow(private_columns)
+    with open(file_name, 'a', newline='') as csvfile:
+      row_len = len(resp_json[category])
+      row_writer = csv.writer(csvfile,
+                              delimiter=' ',
+                              quotechar='"',
+                              quoting=csv.QUOTE_NONNUMERIC)
+      for row in range(row_len):
+        row_writer.writerow([
+            resp_json[category][row]['securityType'],
+            resp_json[category][row]['symbol'],
+            resp_json[category][row]['exchange'],
+            resp_json[category][row]['currency'],
+            resp_json[category][row]['resourceType'],
+            resp_json[category][row]['name'], resp_json[category][row]['last'],
+            resp_json[category][row]['yearHigh'],
+            resp_json[category][row]['dayHigh'],
+            resp_json[category][row]['volume'],
+            resp_json[category][row]['yearLow'],
+            resp_json[category][row]['dayLow'],
+            resp_json[category][row]['pctChangeYTD']
+        ])
+      print(f"file successfully saved as {file_name}")
+      time.sleep(3)
+      os.system("clear")
+
+  def getCrossCurrencies(self):
+    # define the api url
+    url = "https://bb-finance.p.rapidapi.com/market/get-cross-currencies"
+    # create a currency list
+    currency_list = [
+        "aed", "aud", "brl", "cad", "chf", "cnh", "cny", "cop", "czk", "dkk",
+        "eur", "gbp", "hkd", "huf", "idr", "ils", "inr", "jpy", "krw", "mxn",
+        "myr", "nok", "nzd", "php", "pln", "rub", "sek", "sgd", "thb", "try",
+        "twd", "usd", "zar"
+    ]
+    # get the two currencies you want to see their conversion rate
+    currency_one = input("Enter the first currency: ").lower()
+    count = 1
+    while True:
+      if (count % 4) == 0:
+        print("Here is a list of the currency available:")
+        print(currency_list)
+        currency_one = input(
+            "Api may not have this currency or Enter a valid currency: "
+        ).lower()
+        count += 1
+      elif currency_one not in currency_list:
+        currency_one = input(
+            "Api may not have this currency or Enter a valid currency: "
+        ).lower()
+        count += 1
+        continue
+      break
+    time.sleep(2)
+    os.system("clear")
+    currency_two = input("Enter the second currency: ").lower()
+    count = 1
+    while True:
+      if (count % 4) == 0:
+        print("Here is a list of the currency available:")
+        print(currency_list)
+        currency_two = input(
+            "Api may not have this currency or Enter a valid currency: "
+        ).lower()
+        count += 1
+      elif currency_two not in currency_list:
+        currency_two = input(
+            "Api may not have this currency or Enter a valid currency: "
+        ).lower()
+        count += 1
+        continue
+      break
+    time.sleep(2)
+    os.system("clear")
+    # define the querystring with the two currencies
+    querystring = {"id": f"{currency_one}, {currency_two}"}
+    # define the headers including my custom header
+    headers = {
+        "X-RapidAPI-Key": "11afcd18e2msh70d16f51cfb8189p1e4487jsnb40b06717259",
+        "X-RapidAPI-Host": "bb-finance.p.rapidapi.com",
+        "user-agent": "bloomberg_app/1.0"
+    }
+    response = requests.get(url, headers=headers, params=querystring)
+    # here is the exchange rate
+    response = response.json()
+    try:
+      result = response["result"]
+      res_key = list(result.keys())
+    except KeyError:
+      print(
+          f"No Available exchange rate for these currencies {currency_one} and {currency_two}"
+      )
+      time.sleep(6)
+      os.system("clear")
+      return 0
+    else:
+      # print information about the currency exchange
+      for _, item in enumerate(res_key):
+        print(f'Name: {result[item]["name"]}')
+        print(f'Tickername: {result[item]["tickerName"]}')
+        print(f'Basename: {result[item]["baseName"]}')
+        print(f'Yearhigh: {result[item]["yearHigh"]}')
+        print(f'Yearlow: {result[item]["yearLow"]}')
+        print(f'dayhigh: {result[item]["dayHigh"]}')
+        print(f'daylow: {result[item]["dayLow"]}')
+        print(f'Latestprice: {result[item]["last"]}')
+        print("\n")
+    time.sleep(10)
+    os.system("clear")
