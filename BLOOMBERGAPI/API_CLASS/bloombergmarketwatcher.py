@@ -28,32 +28,59 @@ class BloombergMarketWatcher:
     def url(self):
         return self.__url
 
-    @url.setter
-    def url(self, url):
-        try:
-            url_functionality = urllib.parse.urlparse(url)
-            if url_functionality.scheme not in self.schemes:
-                raise ValueError("Invalid Scheme.")
-            elif url_functionality.netloc == "":
-                raise ValueError("Invalid Netloc or web page name.")
-            elif not (url_functionality.port and url_functionality.port.isdigit() and 0 <= int(url_functionality.port) <= 65535):
-                raise ValueError("Invalid port in the URL")
-        except ValueError as error_message:
-        """
-        The except block for ValueError
-        catches these errors that may occur
-        1. if an invalid port is specified in the URL
-        2. Unmatched square brackets in the netloc attribute are found
-        3. Characters in the netloc attribute that decompose under NFKC normalization
-            (as used by the IDNA encoding) into any of /, ?, #, @, or :
-        4. Invalid Scheme.
-        5. Invalid Netloc or web page name.
-        """
-        print(f"{error_message}")
-        time.sleep(10)
-        os.system("clear")
-        else:
-            self.__url = url
-            print(f"URL successfully set to {url}")
-            time.sleep(10)
-            os.system("clear")
+  @url.setter
+  def url(self, url):
+    try:
+      url_functionality = urllib.parse.urlparse(url)
+      if url_functionality.scheme not in self.schemes:
+        raise ValueError("Invalid Scheme.")
+      elif url_functionality.netloc == "":
+        raise ValueError("Invalid Netloc or web page name.")
+      elif not (url_functionality.port and url_functionality.port.isdigit()
+                and 0 <= int(url_functionality.port) <= 65535):
+        raise ValueError("Invalid port in the URL")
+    except ValueError as error_message:
+      """
+      The except block for ValueError
+      catches these errors that may occur
+      1. if an invalid port is specified in the URL
+      2. Unmatched square brackets in the netloc attribute are found
+      3. Characters in the netloc attribute that decompose under NFKC normalization
+         (as used by the IDNA encoding) into any of /, ?, #, @, or :
+      4. Invalid Scheme.
+      5. Invalid Netloc or web page name.
+      """
+      print(f"{error_message}")
+      time.sleep(10)
+      os.system("clear")
+    else:
+      self.__url = url
+      print(f"URL successfully set to {url}")
+      time.sleep(10)
+      os.system("clear")
+
+  @property
+  def header(self):
+    return self.__headers
+
+  @header.setter
+  def add_header(self, key=None, value=None):
+    try:
+      if key is None or value is None:
+        raise ValueError(
+            f"Key and Value should be of type string but Key is of type \
+  {type(key)} and Value is of type {type(value)}")
+      elif not isinstance(key, str) or not isinstance(value, str):
+        raise TypeError(
+            f"Key and Value should be of type string but Key is of type \
+  {type(key)} and Value is of type {type(value)}")
+    except ValueError as error_message:
+      print(f"{error_message}")
+      time.sleep(10)
+      os.system("clear")
+    except TypeError as error_message:
+      print(f"{error_message}")
+      time.sleep(10)
+      os.system("clear")
+    else:
+      self.__headers[key] = value
