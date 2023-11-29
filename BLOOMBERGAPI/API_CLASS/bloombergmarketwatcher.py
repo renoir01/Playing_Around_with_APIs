@@ -114,4 +114,60 @@ class BloombergMarketWatcher:
                 sep="")
           self.__region = input("Enter a region: ").lower()
       time.sleep(10)
-      os.system("clear")      
+      os.system("clear")
+
+  def __regionalLocation(self):
+    print("Here is the list of regions:\n",
+          "Americas\n",
+          "EMEA\n",
+          "APAC",
+          sep="")
+    self.__region = input("Enter a region: ").lower()
+    while True:
+      if self.__region == "americas" or self.__region == "emea" or self.__region == "apac":
+        break
+      else:
+        self.__region = input("Enter a region: ").lower()
+    os.system("clear")
+
+  def __indexNumber(self):
+    if self.__region == "americas":
+      print("Here is a list of the index_name\n",
+            "Enter 1 for DOW JONES INDUS. AVG\n",
+            "Enter 2 for S&P 500 INDEX\n", "Enter 3 for NASDAQ COMPOSITE\n",
+            "Enter 4 for NYSE COMPOSITE INDEX\n",
+            "Enter 5 for S&P/TSX COMPOSITE INDEX")
+      self.__index_name = input("Enter a index_number: ")
+      while True:
+        if self.__index_name == "1" or self.__index_name == "2" or self.__index_name == "3"\
+          or self.__index_name == "4" or self.__index_name == "5":
+          break
+        else:
+          self.__index_name = input("Enter a index_number: ")
+    elif self.__region == "emea":
+      print("Here is a list of the index_name\n",
+            "Enter 1 for Euro Stoxx 50 Pr\n", "Enter 2 for FTSE 100 INDEX\n",
+            "Enter 3 for DAX INDEX\n", "Enter 4 for CAC 40 INDEX\n",
+            "Enter 5 for IBEX 35 INDEX")
+      self.__index_name = input("Enter a index_number: ")
+      while True:
+        if self.__index_name == "1" or self.__index_name == "2" or self.__index_name == "3"\
+          or self.__index_name == "4" or self.__index_name == "5":
+          break
+        else:
+          self.__index_name = input("Enter a index_number: ")
+    else:
+      print("Here is a list of the index_name\n", "Enter 1 for NIKKEI 225\n",
+            "Enter 2 for TOPIX INDEX (TOKYO)\n",
+            "Enter 3 for HANG SENG INDEX\n", "Enter 4 for CSI 300 INDEX\n",
+            "Enter 5 for S&P/ASX 200 INDEX\n",
+            "Enter 6 for MSCI AC ASIA PACIFIC")
+      self.__index_name = input("Enter a index_number: ")
+      while True:
+        if self.__index_name == "1" or self.__index_name == "2" or self.__index_name == "3"\
+          or self.__index_name == "4" or self.__index_name == "5" or self.__index_name == "6":
+          break
+        else:
+          self.__index_name = input("Enter a index_number: ").lower()
+    time.sleep(10)
+    os.system("clear")
