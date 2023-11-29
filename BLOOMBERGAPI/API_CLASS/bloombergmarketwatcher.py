@@ -171,3 +171,32 @@ class BloombergMarketWatcher:
           self.__index_name = input("Enter a index_number: ").lower()
     time.sleep(10)
     os.system("clear")
+ def __indexRegionMapping(self):
+    if self.__region == "americas":
+      america_index = {
+          "1": "indu:ind",
+          "2": "spx:ind",  # not working
+          "3": "ccmp:ind",
+          "4": "nya:ind",  # not working
+          "5": "sptsx:ind"
+      }
+      self.__id = america_index[self.__index_name]
+    elif self.__region == "emea":
+      emea_index = {
+          "1": "sx5e:ind",
+          "2": "ukx:ind",
+          "3": "dax:ind",
+          "4": "cac:ind",
+          "5": "ibex:ind"
+      }
+      self.__id = emea_index[self.__index_name]
+    else:
+      apac_index = {
+          "1": "nky:ind",
+          "2": "tpx:ind",
+          "3": "hsi:ind",
+          "4": "shsz300:ind",
+          "5": "as51:ind",
+          "6": "mxap:ind"  # not working
+      }
+      self.__id = apac_index[self.__index_name]
