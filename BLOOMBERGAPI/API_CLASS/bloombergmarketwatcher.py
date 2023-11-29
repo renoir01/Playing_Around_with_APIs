@@ -200,3 +200,82 @@ class BloombergMarketWatcher:
           "6": "mxap:ind"  # not working
       }
       self.__id = apac_index[self.__index_name]
+
+  def getMovers1(self):
+    """A list of assets that made the most gains in the market."""
+    # url for get movers api
+    self.__regionalLocation()
+    self.__indexNumber()
+    self.__indexRegionMapping()
+
+    # query parameters for the get movers api
+    self.__querystring = {"id": self.__id, "template": "INDEX"}
+    try:
+      response = requests.get(self.__url,
+                              headers=self.__headers,
+                              params=self.__querystring)
+    except requests.exceptions.RequestException as req_error:
+      print(req_error)
+      return 0
+    # convert response to json format
+    resp_json = response.json()
+    # store the data in good format
+    # first open the csv file for writing to add column headers to it.
+    # ask  the user categories
+    print("These are the list of categories:\n", "Active\n", "Laggards\n",
+          "Leaders\n")
+    category = input("Enter a category: ").lower()
+    while True:
+      if category == "active" or category == "laggards" or category == "leaders":
+        break
+      else:
+        category = input("Enter a category: ").lower()
+    file_name = f"{self.__region}_{self.__id}_market_watch_{category}.csv"
+    with open(file_name, 'w', newline='') as csvfile:
+      column_writer = csv.writer(csvfile, delimiter=' ')
+      # get column keys first in a list
+      try:
+        column_keys = list(resp_json[category][0].keys())
+      except KeyError:
+        print(f"Server was unable to process the request with status code \
+{resp_json['status']} and message {resp_json['message']}!!!")
+        time.sleep(7)
+        os.system("clear")
+        return 0
+      # write the column headers to the csv file
+      public_columns = [
+          "securitytype", "symbol", "exchange", "currency", "resourcetype",
+          "name", "last", "yearhigh", "dayhigh", "volume", "yearlow", "daylow",
+          "pctchangeytd"
+      ]
+      private_columns = []
+      for column in column_keys:
+        if column.lower() not in public_columns:
+          continue
+        private_columns.append(column)
+
+      column_writer.writerow(private_columns)
+    with open(file_name, 'a', newline='') as csvfile:
+      row_len = len(resp_json[category])
+      row_writer = csv.writer(csvfile,
+                              delimiter=' ',
+                              quotechar='"',
+                              quoting=csv.QUOTE_NONNUMERIC)
+      for row in range(row_len):
+        row_writer.writerow([
+            resp_json[category][row]['securityType'],
+            resp_json[category][row]['symbol'],
+            resp_json[category][row]['exchange'],
+            resp_json[category][row]['currency'],
+            resp_json[category][row]['resourceType'],
+            resp_json[category][row]['name'], resp_json[category][row]['last'],
+            resp_json[category][row]['yearHigh'],
+            resp_json[category][row]['dayHigh'],
+            resp_json[category][row]['volume'],
+            resp_json[category][row]['yearLow'],
+            resp_json[category][row]['dayLow'],
+            resp_json[category][row]['pctChangeYTD']
+        ])
+      print(f"file successfully saved as {file_name}")
+      time.sleep(3)
+      os.system("clear")      
