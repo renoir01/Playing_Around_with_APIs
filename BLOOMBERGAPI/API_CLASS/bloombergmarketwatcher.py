@@ -434,3 +434,7 @@ class BloombergMarketWatcher:
           print("\n")
       time.sleep(10)
       os.system("clear")
+
+if __name__ == "__main__":
+  market = BloombergMarketWatcher()
+  market.getCrossCurrencies()
