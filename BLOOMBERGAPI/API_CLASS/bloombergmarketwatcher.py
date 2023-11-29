@@ -58,3 +58,29 @@ class BloombergMarketWatcher:
       print(f"URL successfully set to {url}")
       time.sleep(10)
       os.system("clear")
+
+  @property
+  def header(self):
+    return self.__headers
+
+  @header.setter
+  def add_header(self, key=None, value=None):
+    try:
+      if key is None or value is None:
+        raise ValueError(
+            f"Key and Value should be of type string but Key is of type \
+  {type(key)} and Value is of type {type(value)}")
+      elif not isinstance(key, str) or not isinstance(value, str):
+        raise TypeError(
+            f"Key and Value should be of type string but Key is of type \
+  {type(key)} and Value is of type {type(value)}")
+    except ValueError as error_message:
+      print(f"{error_message}")
+      time.sleep(10)
+      os.system("clear")
+    except TypeError as error_message:
+      print(f"{error_message}")
+      time.sleep(10)
+      os.system("clear")
+    else:
+      self.__headers[key] = value
