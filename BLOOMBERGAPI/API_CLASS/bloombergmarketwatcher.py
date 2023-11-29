@@ -84,3 +84,34 @@ class BloombergMarketWatcher:
       os.system("clear")
     else:
       self.__headers[key] = value
+
+  @property
+  def region(self):
+    return self.__region
+
+  @region.setter
+  def region(self, region):
+    try:
+      if not isinstance(region, str):
+        raise TypeError(
+            f"Region should be of type string but Region is of type {type(region)}"
+        )
+    except TypeError as error_message:
+      print(f"{error_message}")
+      time.sleep(10)
+      os.system("clear")
+    else:
+      self.__region = region
+      while True:
+        if self.__region == "americas" or self.__region == "emea" or \
+  self.__region == "apac":
+          break
+        else:
+          print("Here is the list of regions:\n",
+                "Americas\n",
+                "EMEA\n",
+                "APAC",
+                sep="")
+          self.__region = input("Enter a region: ").lower()
+      time.sleep(10)
+      os.system("clear")      
