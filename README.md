@@ -10,6 +10,9 @@ The **Bloomberg Market Watcher Module** is a Python script that encapsulates fun
 	* View the exchange rate between two specified currencies.
 	* Choose from a list of available currencies.
 
+## **video description**
+[loom_description](https://www.loom.com/share/5b6dea325c0945e5b6002b034c8c2492?sid=ca49fbc7-07b1-431b-8f04-2707dda4c1f6)
+
 ## **Prerequisites**
 * Python 3.6 and above
 * Required Python packages: *`requests`*, *`csv`*
