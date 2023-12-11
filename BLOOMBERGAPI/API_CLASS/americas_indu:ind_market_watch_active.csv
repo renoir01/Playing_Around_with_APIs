@@ -1,0 +1,11 @@
+securityType symbol exchange currency resourceType name last yearHigh dayHigh volume yearLow dayLow pctChangeYTD
+"Common Stock" "AAPL" "NASDAQ GS" "USD" "Company" "Apple Inc" "189.37" "198.23" "192.09" 43014224 "124.17" "188.97" "45.75"
+"Common Stock" "INTC" "NASDAQ GS" "USD" "Company" "Intel Corp" "44.94" "45.34" "45.34" 38982026 "24.73" "44.60" "70.03"
+"Common Stock" "MSFT" "NASDAQ GS" "USD" "Company" "Microsoft Corp" "378.85" "384.30" "384.30" 28963399 "219.35" "377.44" "57.97"
+"Common Stock" "CSCO" "NASDAQ GS" "USD" "Company" "Cisco Systems Inc" "48.05" "58.19" "48.44" 16700489 "45.55" "48.03" "0.86"
+"Common Stock" "CVX" "New York" "USD" "Company" "Chevron Corp" "143.91" "187.81" "146.49" 16417135 "140.72" "143.06" "-19.82"
+"Common Stock" "VZ" "New York" "USD" "Company" "Verizon Communications Inc" "37.76" "42.58" "37.89" 16387388 "30.14" "37.53" "-4.16"
+"Common Stock" "DIS" "New York" "USD" "Company" "Walt Disney Co/The" "92.50" "118.18" "93.24" 13857038 "78.73" "91.44" "6.47"
+"Common Stock" "KO" "New York" "USD" "Company" "Coca-Cola Co/The" "58.23" "64.99" "58.67" 11263632 "51.55" "58.10" "-8.46"
+"Common Stock" "WBA" "NASDAQ GS" "USD" "Company" "Walgreens Boots Alliance Inc" "19.98" "42.29" "20.47" 11255182 "19.75" "19.92" "-46.52"
+"Common Stock" "MRK" "New York" "USD" "Company" "Merck & Co Inc" "101.13" "119.65" "101.17" 10286779 "99.14" "99.80" "-8.85"
